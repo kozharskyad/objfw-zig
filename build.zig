@@ -244,11 +244,11 @@ pub fn build(b: *Build) void {
         objfw.path("src"),
     };
 
-    inline for (headers_paths) | header_path | {
+    for (headers_paths) | header_path | {
         lib.installHeadersDirectory(header_path, "ObjFW", .{});
     }
 
-    lib.addIncludePath(objfw.path("src"));
+    lib.installHeader(objfw.path("src/objfw-defs.h"), "ObjFW/objfw-defs.h");
 
     b.installArtifact(lib);
 
