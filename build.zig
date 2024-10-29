@@ -173,15 +173,12 @@ fn buildObjFW(b: *Build, objfw: *Build.Dependency, openssl: *Build.Dependency, p
     setupExternalRun(make_build_libobjfwtls_command, source);
     make_build_libobjfwtls_command.step.dependOn(&make_build_libobjfw_command.step);
 
-    // make install
-    // const make_install_command = b.addSystemCommand(&.{
-    //     "make",
-    //     "install",
-    // });
-    // setupExternalRun(make_install_command, source);
-    // make_install_command.step.dependOn(&make_build_libobjfwtls_command.step);
+    const copy_defs_header = b.addWriteFiles();
+    const copy_defs_header_dir = copy_defs_header.addCopyFile(objfw.path("src/objfw-defs.h"), "objfw-defs.h").dirname();
 
-    dependant.step.dependOn(&make_build_libobjfwtls_command.step);
+    copy_defs_header.step.dependOn(&make_build_libobjfwtls_command.step);
+    dependant.installHeadersDirectory(copy_defs_header_dir, "ObjFW", .{});
+    dependant.step.dependOn(&copy_defs_header.step);
 }
 
 pub fn build(b: *Build) void {
@@ -247,8 +244,6 @@ pub fn build(b: *Build) void {
     for (headers_paths) | header_path | {
         lib.installHeadersDirectory(header_path, "ObjFW", .{});
     }
-
-    lib.installHeader(objfw.path("src/objfw-defs.h"), "ObjFW/objfw-defs.h");
 
     b.installArtifact(lib);
 
