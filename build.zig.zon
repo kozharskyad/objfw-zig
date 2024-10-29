@@ -1,0 +1,18 @@
+.{
+    .name = "ObjFWZig",
+    .version = "0.0.0",
+    .dependencies = .{
+        .objfw = .{
+            .url = "https://github.com/ObjFW/ObjFW/archive/4b2574d0b89aa0c9b800c250f20ab33db60166dc.tar.gz",
+            .hash = "122071f35a237772a9f5bded82bf23c524d2cf3f4180f471d84815c6febbaa3b684e",
+        },
+        .openssl = .{
+            .url = "https://github.com/kozharskyad/openssl-zig/archive/e65f8851249c61037b4664a281a331176c586e24.tar.gz",
+            .hash = "1220673d8f775ceb8c8fd3ccf6f5af3d6cc14ccf0c50340b1658c0232af14eae0135",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+    },
+}
