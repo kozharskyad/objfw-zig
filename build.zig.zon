@@ -14,5 +14,7 @@
     .paths = .{
         "build.zig",
         "build.zig.zon",
+        "constants.zig",
+        "install_clangd_config.zig",
     },
 }
