@@ -1,0 +1,1 @@
+pub const OBJFW_FLAGS = &.{ "-fexceptions", "-fobjc-exceptions", "-funwind-tables", "-fconstant-string-class=OFConstantString", "-Xclang", "-fno-constant-cfstrings", "-Xclang", "-fblocks", "-Wall", "-fobjc-arc", "-fobjc-arc-exceptions" };

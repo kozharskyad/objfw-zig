@@ -1,14 +1,14 @@
 .{
     .name = "ObjFWZig",
-    .version = "0.0.0",
+    .version = "1.1.8",
     .dependencies = .{
         .objfw = .{
-            .url = "https://github.com/ObjFW/ObjFW/archive/4b2574d0b89aa0c9b800c250f20ab33db60166dc.tar.gz",
-            .hash = "122071f35a237772a9f5bded82bf23c524d2cf3f4180f471d84815c6febbaa3b684e",
+            .url = "https://github.com/ObjFW/ObjFW/archive/423652c41203832ee41e61da040b0fc53710a292.tar.gz",
+            .hash = "1220d8f83ff2fc8105b6a7a58d3659698bb771e61a03baee997f8000cf11e083c828",
         },
         .openssl = .{
-            .url = "https://github.com/kozharskyad/openssl-zig/archive/e65f8851249c61037b4664a281a331176c586e24.tar.gz",
-            .hash = "1220673d8f775ceb8c8fd3ccf6f5af3d6cc14ccf0c50340b1658c0232af14eae0135",
+            .url = "https://github.com/kozharskyad/openssl-zig/archive/7136bb3b5de232e3da0c3e7bfab4c6aa6aa92200.tar.gz",
+            .hash = "122082ac269e36d544848c77784a759700b69ce854b967b64ff7058708f7088e64f0",
         },
     },
     .paths = .{
