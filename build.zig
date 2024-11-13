@@ -39,14 +39,14 @@ fn buildObjFW(b: *Build, objfw: *Build.Dependency, openssl_ssl_lib: *Step.Compil
     const source = objfw.path("");
     const autogen_path = objfw.path("autogen.sh").getPath(b);
     const configure_path = objfw.path("configure").getPath(b);
-    const configure_wrap_path = objfw.path("configure_wrap").getPath(b);
+    const configure_wrap = objfw.path("configure_wrap");
 
     const autogen_command = b.addSystemCommand(&.{
         autogen_path,
     });
     setupExternalRun(autogen_command, source);
 
-    const configure_wrap_script = b.addWriteFile(configure_wrap_path,
+    const configure_wrap_script = b.addWriteFile(configure_wrap.getPath(b),
         \\OPENSSL_SSL_LIB_DIR="$(dirname """$1""")"
         \\OPENSSL_CRYPTO_LIB_DIR="$(dirname """$2""")"
         \\OPENSSL_SSL_INC_DIR="$3"
@@ -64,12 +64,14 @@ fn buildObjFW(b: *Build, objfw: *Build.Dependency, openssl_ssl_lib: *Step.Compil
         \\  --disable-shared
         \\
     );
+    configure_wrap.addStepDependencies(configure_wrap_script);
 
     const configure_wrap_command = b.addSystemCommand(&.{
         "bash",
-        configure_wrap_path,
+        configure_wrap,
     });
     setupExternalRun(configure_wrap_command, source);
+    configure_wrap_command.addFileArg(configure_wrap);
     configure_wrap_command.addArtifactArg(openssl_ssl_lib);
     configure_wrap_command.addArtifactArg(openssl_crypto_lib);
     configure_wrap_command.addDirectoryArg(openssl_ssl_lib.getEmittedIncludeTree());
